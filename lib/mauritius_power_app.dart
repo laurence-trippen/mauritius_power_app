@@ -12,7 +12,7 @@ class MauritiusPowerApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
         useMaterial3: true,
       ),
-      home: NavigationScreen(),
+      home: const NavigationScreen(),
     );
   }
 }

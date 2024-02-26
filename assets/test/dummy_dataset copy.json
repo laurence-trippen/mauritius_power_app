@@ -1,0 +1,69 @@
+{
+  "blackriver": [
+    {
+      "date": "Le dimanche 13 mars 2022 de  09:30:00 à  13:00:00",
+      "locality": "TAMARIN",
+      "streets": "AVE DES MARLINS, AVE DES CAMPECHES, AVE DES BONITES ET UNE PARTIE DE BLACK ROCK ROAD",
+      "district": "blackriver",
+      "from": "2022-03-13T05:30:00.000Z",
+      "to": "2022-03-13T09:00:00.000Z",
+      "id": "e562a818d6d27163396e3c0069fd51c9"
+    },
+    {
+      "date": "Le vendredi 11 mars 2022 de  09:00:00 à  14:00:00",
+      "locality": "LA MIVOIE",
+      "streets": "AVE DES NATTES ET UNE PARTIE DE LA ROUTE COTIERE",
+      "district": "blackriver",
+      "from": "2022-03-11T05:00:00.000Z",
+      "to": "2022-03-11T10:00:00.000Z",
+      "id": "3bb6a0bf3432120ac703c354867ea985"
+    },
+    {
+      "date": "Le mercredi 16 mars 2022 de  12:30:00 à  14:30:00",
+      "locality": "FLIC-EN-FLAC",
+      "streets": "MORC BISMIC",
+      "district": "blackriver",
+      "from": "2022-03-16T08:30:00.000Z",
+      "to": "2022-03-16T10:30:00.000Z",
+      "id": "f305aef9622b04c6b8aad5ffa847215e"
+    }
+  ],
+  "flacq": [
+    {
+      "date": "Le dimanche 13 mars 2022 de  08:00:00 à  17:00:00",
+      "locality": "CENTRAL FLACQ",
+      "streets": "Morc Plaine Des Gersigny, Camp Maness, L’hôpital de Flacq, Courts Mammouth, Aegle Clinique et Station de Police",
+      "district": "flacq",
+      "from": "2022-03-13T04:00:00.000Z",
+      "to": "2022-03-13T13:00:00.000Z",
+      "id": "25577b77a6624f09696f2cc16c45ff02"
+    },
+    {
+      "date": "Le jeudi 17 mars 2022 de  08:45:00 à  15:00:00",
+      "locality": "CLEMENCIA",
+      "streets": "Village Clemencia",
+      "district": "flacq",
+      "from": "2022-03-17T04:45:00.000Z",
+      "to": "2022-03-17T11:00:00.000Z",
+      "id": "7dd3c828c5bd307734f82f3f81f64c0a"
+    },
+    {
+      "date": "Le mercredi 23 mars 2022 de  08:30:00 à  15:00:00",
+      "locality": "BEAU CHAMP FLACQ",
+      "streets": "Morc VRS Beau Champ dans les périmètres du Kovil",
+      "district": "flacq",
+      "from": "2022-03-23T04:30:00.000Z",
+      "to": "2022-03-23T11:00:00.000Z",
+      "id": "bb01337c5811f628a4ec264fc36f10b3"
+    },
+    {
+      "date": "Le vendredi 25 mars 2022 de  08:30:00 à  15:00:00",
+      "locality": "ERNEST FLORENT",
+      "streets": "Ernest Florent dans les périmètres de Route Royale",
+      "district": "flacq",
+      "from": "2022-03-25T04:30:00.000Z",
+      "to": "2022-03-25T11:00:00.000Z",
+      "id": "616f3a6eff3b4f733b5dba26b3b878bc"
+    }
+  ]
+}

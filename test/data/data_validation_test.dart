@@ -1,7 +1,9 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
+import 'package:json_schema/json_schema.dart';
 
 void main() {
   test("dataset must be available", () async {
@@ -32,14 +34,16 @@ void main() {
     // ACT
     final response = await http.get(testUri);
 
-    final Map<String, dynamic> decodedJson = json.decode(response.body);
+    File schemaFile = File("assets/schemas/dataset.schema.json");
+    final jsonSchemaString = await schemaFile.readAsString();
 
-    decodedJson.keys.toList().forEach((element) {
-      // ignore: avoid_print
-      print(element);
-    });
+    final schema = JsonSchema.create(jsonSchemaString);
+    final result = schema.validate(response.body);
+
+    print(result.errors);
+    print(result.warnings);
 
     // ASSERT
-    expect(true, equals(true));
+    expect(result.isValid, equals(true));
   });
 }

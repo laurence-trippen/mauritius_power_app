@@ -22,7 +22,30 @@ void main() {
         ]));
   });
 
-  test("dataset should be in shape and parsable", () async {
+  test("dataset must be a decodable JSON-Format", () async {
+    // ARRANGE
+    final testUri = Uri.https(
+      "raw.githubusercontent.com",
+      "MrSunshyne/mauritius-dataset-electricity/main/data/power-outages.json",
+    );
+
+    // ACT
+    final response = await http.get(testUri);
+
+    bool isJsonDecodable = true;
+    try {
+      json.decode(response.body);
+    } catch (e) {
+      isJsonDecodable = false;
+    }
+
+    // ASSERT
+    expect(() => json.decode("invalidJson{}:asdasd23!#"), throwsException);
+    expect(() => json.decode(response.body), returnsNormally);
+    expect(isJsonDecodable, equals(true));
+  });
+
+  test("dataset top-level should be all strings", () async {
     // ARRANGE
     final testUri = Uri.https(
       "raw.githubusercontent.com",
@@ -52,6 +75,22 @@ void main() {
 
     final bool allTopLevelKeysAreStrings = checkAllKeysAreStrings(decodedJson);
 
+    // ASSERT
+    expect(allTopLevelKeysAreStrings, equals(true));
+  });
+
+  test("all dataset records should be in shape", () async {
+    // ARRANGE
+    final testUri = Uri.https(
+      "raw.githubusercontent.com",
+      "MrSunshyne/mauritius-dataset-electricity/main/data/power-outages.json",
+    );
+
+    // ACT
+    final response = await http.get(testUri);
+
+    final Map<dynamic, dynamic> decodedJson = json.decode(response.body);
+
     // Check district array of objects
     bool validateRecordKeys(Map<dynamic, dynamic> json) {
       for (final key in json.keys) {
@@ -68,7 +107,7 @@ void main() {
           case "from":
           case "to":
           case "id":
-            print("Valid record key: $key");
+            continue;
           default:
             print("Found invalid key: $key");
             return false;
@@ -86,9 +125,10 @@ void main() {
         }
 
         switch (entry.key as String) {
+          case "streets":
+            continue;
           case "date":
           case "locality":
-          case "streets":
           case "district":
           case "id":
             {
@@ -104,7 +144,9 @@ void main() {
                 DateTime.tryParse(entry.value as String);
               } catch (e) {
                 print(
-                    "Found invalid date format: ${entry.key} => ${entry.value}");
+                  "Found invalid date format: ${entry.key} => ${entry.value}",
+                );
+
                 return false;
               }
             }
@@ -117,24 +159,27 @@ void main() {
       return true;
     }
 
-    final Map<dynamic, dynamic> testRecord = json.decode("""
-    {
-      "date": "Le mercredi 16 mars 2022 de  12:30:00 à  14:30:00",
-      "locality": "FLIC-EN-FLAC",
-      "streets": "MORC BISMIC",
-      "district": "blackriver",
-      "from": "2022-03-16T08:30:00.000Z",
-      "to": "2022-03-16T10:30:00.000Z",
-      "id": "f305aef9622b04c6b8aad5ffa847215e"
+    void validateAllRecords(Iterable<dynamic> values) {
+      int recordCounter = 0;
+
+      for (final recordList in values) {
+        for (final Map<dynamic, dynamic> record in recordList) {
+          recordCounter++;
+
+          final areRecordKeysValid = validateRecordKeys(record);
+          final areRecordValuesValid = validateRecordValues(record);
+
+          if (areRecordKeysValid == false || areRecordValuesValid == false) {
+            print("Checked $recordCounter records");
+            throw "Found invalid record: ${record.toString()}";
+          }
+        }
+      }
+
+      print("Checked successfuly $recordCounter records");
     }
-    """);
 
-    bool areRecordKeysValid = validateRecordKeys(testRecord);
-    bool areRecordValuesValid = validateRecordValues(testRecord);
-
-    // ASSERT
-    expect(allTopLevelKeysAreStrings, equals(true));
-    expect(areRecordKeysValid, equals(true));
-    expect(areRecordValuesValid, equals(true));
+    // // ASSERT
+    expect(() => validateAllRecords(decodedJson.values), returnsNormally);
   });
 }

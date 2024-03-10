@@ -1,6 +1,7 @@
+import 'package:equatable/equatable.dart';
 import 'package:mauritius_power_app/models/district.dart';
 
-class PowerOutageModel {
+class PowerOutageModel with EquatableMixin {
   final String id;
   final DateTime date;
   final String locality;
@@ -30,4 +31,7 @@ class PowerOutageModel {
       to: DateTime.parse(json['to']),
     );
   }
+
+  @override
+  List<Object> get props => [id, date, locality, streets, district, from, to];
 }

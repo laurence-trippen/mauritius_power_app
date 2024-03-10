@@ -3,7 +3,9 @@ import 'package:mauritius_power_app/models/power_outage_model.dart';
 import 'package:http/http.dart' as http;
 
 class HttpPowerOutageAPI implements IPowerOutageAPI {
-  const HttpPowerOutageAPI(http.Client client);
+  final http.Client client;
+
+  const HttpPowerOutageAPI(this.client);
 
   @override
   Future<List<PowerOutageModel>> getAllOutages() {
@@ -19,7 +21,7 @@ class HttpPowerOutageAPI implements IPowerOutageAPI {
 
   @override
   Future<void> saveOutages(List<PowerOutageModel> outages) {
-    // TODO: implement saveOutages
-    throw UnimplementedError();
+    throw UnimplementedError(
+        "saveOutages isn't supported for the read-only Http-API.");
   }
 }

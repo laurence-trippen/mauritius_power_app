@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:mauritius_power_app/bloc/power_outage/power_outage_bloc.dart';
 
 class MapScreen extends StatefulWidget {
   const MapScreen({super.key});
@@ -41,6 +43,18 @@ class _MapScreenState extends State<MapScreen> {
                 // ),
               ),
             ]),
+        BlocBuilder<PowerOutageBloc, PowerOutageState>(
+            builder: (context, state) =>
+                state.status == PowerOutageStatus.loading
+                    ? const Positioned(
+                        top: 50,
+                        right: 15,
+                        child: CircularProgressIndicator(
+                          backgroundColor: Colors.white,
+                          strokeWidth: 8,
+                        ),
+                      )
+                    : Container()),
       ],
     );
   }

@@ -1,15 +1,19 @@
 import 'package:mauritius_power_app/api/power_outage_api.dart';
+import 'package:mauritius_power_app/http/app_http_client.dart';
 import 'package:mauritius_power_app/models/power_outage_model.dart';
-import 'package:http/http.dart' as http;
 
 class HttpPowerOutageAPI implements IPowerOutageAPI {
-  final http.Client client;
+  static const String powerOutageEndpoint =
+      "https://raw.githubusercontent.com/MrSunshyne/mauritius-dataset-electricity/main/data/power-outages.json";
+
+  final AppHttpClient client;
 
   const HttpPowerOutageAPI(this.client);
 
   @override
   Future<List<PowerOutageModel>> getAllOutages() {
-    // TODO: implement getAllOutages
+    // client.get(AppHttpRequest(url: "", customBaseUrl: ))
+
     throw UnimplementedError();
   }
 
